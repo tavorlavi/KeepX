@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/grad"
+    tools:context=".Settingsfrag">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/ttop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/prime">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Account"
+                android:textSize="35dp"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-condensed"
+                android:layout_margin="10dp"
+
+                />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp"
+            android:layout_marginTop="150dp"
+            android:layout_marginHorizontal="35dp"
+        >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+            <ImageView
+                android:layout_marginTop="30dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/baseline_perm_identity_24"/>
+            <TextView
+                android:id="@+id/emailtv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="myEmail123@email.com"
+                android:textSize="20dp"
+                android:layout_margin="30dp"
+                android:fontFamily="sans-serif-condensed"
+                />
+
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                    <Button
+                        android:id="@+id/resetpass"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Reset Password"
+                        android:layout_columnWeight="1"
+                        android:padding="-5dp"
+
+                        android:backgroundTint="@color/white"
+                        android:textColor="@color/black"
+                        />
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                    <Button
+                        android:id="@+id/logout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Logout"
+                        android:layout_columnWeight="1"
+                        android:padding="-5dp"
+                        android:backgroundTint="@color/white"
+                        android:textColor="@color/black"
+                        />
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Delete Account"
+                        android:id="@+id/deleteacc"
+                        android:layout_columnWeight="1"
+                        android:padding="-5dp"
+                        android:backgroundTint="@color/white"
+                        android:textColor="#FF0000"
+                        />
+
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+    </LinearLayout>
+
+
+</FrameLayout>

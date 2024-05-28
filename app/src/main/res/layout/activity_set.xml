@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/grad"
+    tools:context=".Set">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/prime">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Crop"
+                android:textSize="35dp"
+                android:id="@+id/settext"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-condensed"
+                android:layout_margin="10dp"
+
+                />
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="30dp"
+                android:backgroundTint="#063273"
+                android:id="@+id/ticketset"
+                android:layout_margin="20dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_gravity="center"
+                            android:layout_marginHorizontal="15dp"
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/ticket_confirmation"
+                            app:layout_constraintEnd_toStartOf="@+id/imvCircularWithStroke"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            android:tint="@color/white"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:shapeAppearanceOverlay="@style/Circular"/>
+                        <EditText
+                            android:textColorHint="#7D9FC6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="Ticket title"
+                            android:id="@+id/settitle"
+                            android:textSize="25sp"
+                            android:layout_marginTop="8dp"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/white"/>
+
+                    </LinearLayout>
+
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginHorizontal="25dp"
+                        android:layout_marginBottom="25dp"
+                        android:layout_marginTop="10dp"
+                        android:columnCount="2"
+                        >
+                        <TextView
+                            android:textSize="18sp"
+                            android:layout_columnSpan="2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#80FFFFFF"
+                            android:text="Location"/>
+                        <EditText
+                            android:id="@+id/setlocation"
+                            android:layout_columnSpan="2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#FFFFFF"
+                            android:hint="Ticket location"
+                            android:textColorHint="#7D9FC6"
+                            android:layout_marginBottom="15dp"
+                            android:textSize="20sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:textSize="18sp"
+                            android:layout_height="wrap_content"
+                            android:textColor="#80FFFFFF"
+
+                            android:layout_columnWeight="0"
+                            android:text="Date"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:textSize="18sp"
+                            android:layout_height="wrap_content"
+                            android:textColor="#80FFFFFF"
+                            android:layout_columnWeight="1"
+                            android:textAlignment="textEnd"
+                            android:text="Time"/>
+                        <TextView
+                            android:id="@+id/setdate"
+                            android:layout_width="wrap_content"
+                            android:textSize="15sp"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:layout_columnWeight="0"
+                            android:layout_marginBottom="15dp"
+                            android:text="Tap to add date"/>
+
+
+                        <TextView
+                            android:id="@+id/settime"
+                            android:layout_width="wrap_content"
+                            android:textSize="15sp"
+                            android:layout_marginBottom="15dp"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:layout_columnWeight="1"
+                            android:textAlignment="textEnd"
+                            android:text="Tap to add time"/>
+
+                    </GridLayout>
+
+                    <androidx.cardview.widget.CardView
+
+                        android:backgroundTint="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="20dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="25dp">
+                        <ImageView
+                            android:id="@+id/idIVQrcode"
+                            android:layout_width="100dp"
+                            android:layout_gravity="center"
+                            android:layout_height="100dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/img_1"
+                            />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:scaleType="centerCrop"
+                        android:tint="#BF063273"
+                        android:id="@+id/imgset"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/ic_launcher_background"
+                        />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:orientation="vertical"-->
+<!--            android:gravity="center_horizontal"-->
+<!--            >-->
+<!--        <ImageView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="20dp"-->
+<!--        android:scaleType="fitCenter"-->
+<!--        android:adjustViewBounds="true"-->
+<!--        android:id="@+id/imgset"/>-->
+<!--        <EditText-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:id="@+id/edname"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:hint="Name"-->
+<!--            android:inputType="textPersonName"-->
+<!--            android:background="@drawable/custom_edittext"-->
+<!--            android:layout_marginHorizontal="20dp"-->
+<!--            android:layout_marginVertical="4dp"-->
+<!--            android:padding="8dp"-->
+<!--            />-->
+<!--            <EditText-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:hint="Date"-->
+<!--                android:inputType="date"-->
+<!--                android:background="@drawable/custom_edittext"-->
+<!--                android:layout_marginHorizontal="20dp"-->
+<!--                android:layout_marginVertical="4dp"-->
+<!--                android:padding="8dp"-->
+<!--                />-->
+<!--            <EditText-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:hint="Time"-->
+<!--                android:inputType="time"-->
+<!--                android:background="@drawable/custom_edittext"-->
+<!--                android:layout_marginHorizontal="20dp"-->
+<!--                android:layout_marginVertical="4dp"-->
+<!--                android:padding="8dp"-->
+<!--                />-->
+<!--            <EditText-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:inputType="textPostalAddress"-->
+<!--                android:hint="Location"-->
+<!--                android:background="@drawable/custom_edittext"-->
+<!--                android:layout_marginHorizontal="20dp"-->
+<!--                android:layout_marginVertical="4dp"-->
+<!--                android:padding="8dp"-->
+<!--                />-->
+<!--            <Button-->
+<!--                android:id="@+id/loginButton"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="55dp"-->
+<!--                android:layout_marginVertical="5dp"-->
+<!--                android:layout_marginHorizontal="20dp"-->
+<!--                android:backgroundTint="@color/prime"-->
+
+<!--                android:text="Add"-->
+<!--                android:textSize="25dp"-->
+<!--                app:cornerRadius="20dp" />-->
+
+<!--        </LinearLayout>-->
+<!--    <ScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        >-->
+    <Button
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:text="Submit"
+        android:backgroundTint="#FF063273"
+        android:fontFamily="sans-serif-condensed"
+        android:id="@+id/setsub"
+        android:textSize="30sp"/>
+    <androidx.cardview.widget.CardView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="30dp"
+        android:backgroundTint="#063273"
+        android:id="@+id/docset"
+        android:layout_margin="20dp">
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <EditText
+                android:textColorHint="#7D9FC6"
+                android:id="@+id/setidtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Document title"
+                android:textSize="25sp"
+                android:layout_marginBottom="-10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginHorizontal="15dp"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/white"/>
+            />
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="30dp"
+                android:backgroundTint="#FFFFFF"
+                android:layout_margin="15dp">
+                <ImageButton
+                    android:id="@+id/setidimage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_launcher_background"
+                    android:scaleType="fitCenter"
+                    android:background="@color/white"
+                    android:adjustViewBounds="true"
+                    />
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1">
+
+<!--    </ScrollView>-->
+</LinearLayout>
+</LinearLayout>

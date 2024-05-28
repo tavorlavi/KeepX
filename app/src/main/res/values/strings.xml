@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">KeepX</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ticketTitle">No Title</string>
+    <string name="ticketLocation"></string>
+    <string name="ticketDate"></string>
+    <string name="ticketTime"></string>
+</resources>

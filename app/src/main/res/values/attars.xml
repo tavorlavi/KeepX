@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TicketView">
+        <attr name="Title" format="string"/>
+        <attr name="Location" format="string" />
+        <attr name="Date" format="string"/>
+        <attr name="Time" format="string"/>
+        <attr name="QR" format="string"/>
+        <attr name="Image" format="string"/>
+    </declare-styleable>
+    <declare-styleable name="Docview">
+        <attr name="TitleDoc" format="string"/>
+        <attr name="ImageDoc" format="string"/>
+    </declare-styleable>
+</resources>

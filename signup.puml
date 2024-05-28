@@ -1,0 +1,16 @@
+@startuml
+class com.example.keepx.Signup {
+- EditText email
+- TextView login
+- ProgressBar progressbar
+- Button signup
+- FirebaseAuth mAuth
+# void onCreate(Bundle)
+- void registerNewUser(String,String,String,ProgressBar)
+}
+
+
+
+
+androidx.appcompat.app.AppCompatActivity <|-- com.example.keepx.Signup
+@enduml

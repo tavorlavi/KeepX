@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "526014781717",
+    "project_id": "keepx-bfce5",
+    "storage_bucket": "keepx-bfce5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:526014781717:android:ad5519260f84802980311c",
+        "android_client_info": {
+          "package_name": "com.example.keepx"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4j1-Rzur8M8fnYxRYPsJ045sMfHcWSaE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

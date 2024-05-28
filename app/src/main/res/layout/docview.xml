@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/docviewcard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="30dp"
+        android:backgroundTint="#063273"
+        android:layout_margin="20dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+        <TextView
+            android:id="@+id/doctitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Document titlehhhhhhhhhh"
+            android:textSize="25sp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/white"/>
+            <ImageButton
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:adjustViewBounds="true"
+                android:background="#00FFFFFF"
+                android:scaleType="fitXY"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/baseline_favorite_24"
+                android:visibility="gone"
+                android:id="@+id/docfav"
+                app:tint="@color/white" />
+            <ImageButton
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:adjustViewBounds="true"
+                android:background="#00FFFFFF"
+                android:scaleType="fitXY"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="15dp"
+                android:id="@+id/docnotfav"
+                android:src="@drawable/favorite_outline"
+                app:tint="@color/white" />
+            </LinearLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="30dp"
+            android:backgroundTint="#FFFFFF"
+            android:layout_margin="15dp">
+            <ImageButton
+                android:id="@+id/docimage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitCenter"
+                android:background="@color/white"
+                android:adjustViewBounds="true"
+                />
+
+        </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

@@ -1,0 +1,217 @@
+@startuml
+class com.example.keepx.Set {
+- ImageView anatush
+- int bgColor
+- int fgColor
+- EditText settitle
+- String extxt
+- ImageView qr
+- CardView ticket
+- TextView setdate
+- String source
+- Button submit
+- int mYear
+- String strdate
+~ FirebaseDatabase firebaseDatabase
+~ DatabaseReference databaseReference
+# void onCreate(Bundle)
+# String redqr(Bitmap)
+}
+
+
+class com.example.keepx.CropImg {
+- DocumentScannerView dcv
+- String source
+# void onCreate(Bundle)
++ void reset(View)
++ void apply(View)
+}
+
+
+class com.example.keepx.MainNav {
+- {static} int pic_id
+~ Uri image_uri
+- String source
+~ BottomNavigationView bottomNavigationView
+~ IdFrag firstFragment
+~ Ticketsfrag secondFragment
+~ Settingsfrag setfrag
+~ FavFragment favfrag
+~ String currentPhotoPath
+# void onCreate(Bundle)
++ boolean onNavigationItemSelected(MenuItem)
++ void create(View)
++ void onRequestPermissionsResult(int,String[],int[])
+# void onActivityResult(int,int,Intent)
+- File createImageFile()
+}
+
+
+class com.example.keepx.Docview {
+- TextView title
+- ImageView image
+- String title1
+- String image1
+- CardView cardView
+- ImageButton fav
++ void setTitle(String)
++ String getTitle()
++ void setImage(String)
++ void setFav(boolean)
++ String getImage()
+}
+
+
+class com.example.keepx.IdFrag {
+- EditText search
+- ImageButton x
+- CardView cd1
+- View rootView
+- ImageButton sid
+- SwipeRefreshLayout mySwipeRefreshLayout
+~ FirebaseDatabase firebaseDatabase
+~ DatabaseReference databaseReference
+- LinearLayout docs
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void LoadDocs()
+}
+
+
+class com.example.keepx.FavFragment {
+- CardView cd1
+- View rootView
+- EditText search
+- ImageButton x
+~ LinearLayout favs
+~ FirebaseDatabase firebaseDatabase
+~ DatabaseReference databaseReference
+- SwipeRefreshLayout mySwipeRefreshLayout
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void Load()
+}
+
+
+class com.example.keepx.Docinfo {
+- String image
+- boolean fav
++ String getImage()
++ void setImage(String)
++ String getTitle()
++ void setTitle(String)
++ String getUid()
++ void setUid(String)
++ void setFav(boolean)
++ boolean getFav()
+}
+
+
+class com.example.keepx.MainActivity {
+- EditText email
+- Button login
+- ProgressBar progressbar
+- FirebaseAuth mAuth
+- TextView signup
+# void onCreate(Bundle)
+- void loginUserAccount(String,String,ProgressBar)
++ void bioLogin(View)
+}
+
+
+class com.example.keepx.Ticketinfo {
+- String title
+- String image
+- boolean fav
++ String getImage()
++ String getTitle()
++ String getLocation()
++ String getTime()
++ String getDate()
++ void setDate(String)
++ void setImage(String)
++ void setLocation(String)
++ void setTime(String)
++ void setTitle(String)
++ String getQr()
++ void setQr(String)
++ String getUid()
++ void setUid(String)
++ boolean getFav()
++ void setFav(boolean)
+}
+
+
+class com.example.keepx.Ticketsfrag {
+- CardView cd1
+- View rootView
+- EditText search
+- ImageButton x
+- ContentLoadingProgressBar progressBar
+- LinearLayout tickets
+- SwipeRefreshLayout mySwipeRefreshLayout
+~ FirebaseDatabase firebaseDatabase
+~ DatabaseReference databaseReference
+- boolean found
+- ImageButton st
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void LoadTickets()
+}
+
+
+class com.example.keepx.Signup {
+- EditText email
+- TextView login
+- ProgressBar progressbar
+- Button signup
+- FirebaseAuth mAuth
+# void onCreate(Bundle)
+- void registerNewUser(String,String,String,ProgressBar)
+}
+
+
+class com.example.keepx.TicketView {
+- int myear
+- TextView title
+- ImageView qr
+- ContentLoadingProgressBar progressBar
+- String image1
+- TimePickerDialog timePickerDialog
+- DatePickerDialog datePickerDialog
+- CardView cardView
+- ImageButton reminder
+- ImageButton locationicon
+- String title1
+- boolean isclicked
+- AlarmManager alarmMgr
+- PendingIntent alarmIntent
++ void setTitle(String)
++ void setLocation(String)
++ void setDate(String)
++ void setTime(String)
++ void setImage(String)
++ void setQr(String)
++ String getImage()
++ String getTitle()
++ void setUid(String)
++ void setFav(boolean)
+}
+
+
+class com.example.keepx.Settingsfrag {
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
+}
+
+
+
+androidx.appcompat.app.AppCompatActivity <|-- com.example.keepx.Set
+androidx.appcompat.app.AppCompatActivity <|-- com.example.keepx.CropImg
+com.example.keepx.OnNavigationItemSelectedListener <|.. com.example.keepx.MainNav
+androidx.appcompat.app.AppCompatActivity <|-- com.example.keepx.MainNav
+android.widget.RelativeLayout <|-- com.example.keepx.Docview
+androidx.fragment.app.Fragment <|-- com.example.keepx.IdFrag
+androidx.fragment.app.Fragment <|-- com.example.keepx.FavFragment
+androidx.appcompat.app.AppCompatActivity <|-- com.example.keepx.MainActivity
+androidx.fragment.app.Fragment <|-- com.example.keepx.Ticketsfrag
+androidx.appcompat.app.AppCompatActivity <|-- com.example.keepx.Signup
+android.widget.RelativeLayout <|-- com.example.keepx.TicketView
+androidx.fragment.app.Fragment <|-- com.example.keepx.Settingsfrag
+@enduml
