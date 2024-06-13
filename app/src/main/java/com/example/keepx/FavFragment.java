@@ -1,5 +1,7 @@
 package com.example.keepx;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +18,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,9 +29,11 @@ import com.google.firebase.database.FirebaseDatabase;
 public class FavFragment extends Fragment {
     private CardView cd1, svcdf;
     private View rootView;
+    private ProgressDialog progressDialog;
     private EditText search;
     private ImageButton x, back, sf;
     LinearLayout favs;
+    BottomNavigationView bottomNavigationView;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     private SwipeRefreshLayout mySwipeRefreshLayout;
@@ -41,6 +47,10 @@ public class FavFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_fav, container, false);
+//        bottomNavigationView = rootView.findViewById(R.id.bottomNavigationView);
+
+//        dont allowclicks until loaded
+//        bottomNavigationView.setVisibility(View.GONE);
         cd1 = rootView.findViewById(R.id.ftop);
         favs = rootView.findViewById(R.id.favlayout);
         mySwipeRefreshLayout = rootView.findViewById(R.id.reffav);
@@ -50,6 +60,13 @@ public class FavFragment extends Fragment {
         );
         svcdf = rootView.findViewById(R.id.svcvf);
         search = rootView.findViewById(R.id.efavsearch);
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+
+        // Show the ProgressDialog
+        progressDialog.show();
+
         search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -118,7 +135,15 @@ public class FavFragment extends Fragment {
         svcdf.setVisibility(View.GONE);
 
         Load();
-        return rootView;
+//        bottomNavigationView.setVisibility(View.VISIBLE);
+
+        try {
+            return rootView;
+        }
+        catch (Exception e){
+            return null;
+        }
+
     }
     public void Load() {
 //        found=true;
@@ -126,11 +151,13 @@ public class FavFragment extends Fragment {
         databaseReference = firebaseDatabase.getReference("tickets/"+ FirebaseAuth.getInstance().getCurrentUser().getUid());
         favs.removeAllViews();
         mySwipeRefreshLayout.setRefreshing(true);
+        try {
         databaseReference.addChildEventListener(new com.google.firebase.database.ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
                 Ticketinfo ticketinfo = dataSnapshot.getValue(Ticketinfo.class);
                 if (ticketinfo.getFav()){
+
                     TicketView ticketView = new TicketView(getContext(), null);
                     ticketView.setTitle(ticketinfo.getTitle());
                     if (ticketinfo.getLocation() != null && !ticketinfo.getLocation().isEmpty())
@@ -150,6 +177,7 @@ public class FavFragment extends Fragment {
                     favs.addView(ticketView);}
             }
 
+
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String s) {
                 System.out.println("jfjfjfjf");
@@ -195,65 +223,85 @@ public class FavFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
-        databaseReference = firebaseDatabase.getReference("documents/"+ FirebaseAuth.getInstance().getCurrentUser().getUid());
-        databaseReference.addChildEventListener(new com.google.firebase.database.ChildEventListener() {
+        });}
+        catch (Exception e){
+            System.out.println(e);
+        }
+        databaseReference.get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
-                Docinfo docinfo = dataSnapshot.getValue(Docinfo.class);
-                if (docinfo.getFav()){
-                    Docview doc = new Docview(getContext(), null);
-                    doc.setTitle(docinfo.getTitle());
-                    doc.setImage(docinfo.getImage());
-                    doc.setFav(docinfo.getFav());
-                    favs.addView(doc);}
-            }
+            public void onSuccess(DataSnapshot dataSnapshot) {
 
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String s) {
-                Docinfo docinfo = dataSnapshot.getValue(Docinfo.class);
-                for (int i=0;i<favs.getChildCount();i++){
-                    try {
-                        System.out.println(favs.getChildAt(i).getClass());
-                        Docview v =(Docview)  favs.getChildAt(i);
-                        if (v.getImage().equals(docinfo.getImage())){
-                            favs.removeView(v);
+
+
+
+                databaseReference = firebaseDatabase.getReference("documents/"+ FirebaseAuth.getInstance().getCurrentUser().getUid());
+                databaseReference.addChildEventListener(new com.google.firebase.database.ChildEventListener() {
+                    @Override
+                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
+                        Docinfo docinfo = dataSnapshot.getValue(Docinfo.class);
+                        if (docinfo.getFav()){
+                            Docview doc = new Docview(getContext(), null);
+                            doc.setTitle(docinfo.getTitle());
+                            doc.setImage(docinfo.getImage());
+                            doc.setFav(docinfo.getFav());
+                            favs.addView(doc);}
+                    }
+
+                    @Override
+                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String s) {
+                        Docinfo docinfo = dataSnapshot.getValue(Docinfo.class);
+                        for (int i=0;i<favs.getChildCount();i++){
+                            try {
+                                System.out.println(favs.getChildAt(i).getClass());
+                                Docview v =(Docview)  favs.getChildAt(i);
+                                if (v.getImage().equals(docinfo.getImage())){
+                                    favs.removeView(v);
+                                }
+                            }
+                            catch (Exception e){
+
+                            }
                         }
                     }
-                    catch (Exception e){
 
-                    }
-                }
-            }
+                    @Override
+                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                        Docinfo docinfo = dataSnapshot.getValue(Docinfo.class);
+                        for (int i=0;i<favs.getChildCount();i++){
+                            try {
+                                System.out.println(favs.getChildAt(i).getClass());
+                                Docview v =(Docview)  favs.getChildAt(i);
+                                if (v.getImage().equals(docinfo.getImage())){
+                                    favs.removeView(v);
+                                }
+                            }
+                            catch (Exception e){
 
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                Docinfo docinfo = dataSnapshot.getValue(Docinfo.class);
-                for (int i=0;i<favs.getChildCount();i++){
-                    try {
-                        System.out.println(favs.getChildAt(i).getClass());
-                        Docview v =(Docview)  favs.getChildAt(i);
-                        if (v.getImage().equals(docinfo.getImage())){
-                            favs.removeView(v);
+                            }
                         }
                     }
-                    catch (Exception e){
+
+                    @Override
+                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, String s) {
 
                     }
-                }
-            }
 
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, String s) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
+                    }
+                });
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+
+
 
             }
         });
+
         mySwipeRefreshLayout.setRefreshing(false);
+        progressDialog.dismiss();
 
     }
+
 }

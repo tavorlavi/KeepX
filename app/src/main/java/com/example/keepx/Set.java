@@ -91,7 +91,6 @@ public class Set extends AppCompatActivity {
         ticket = findViewById(R.id.ticketset);
         doc = findViewById(R.id.docset);
         submit = findViewById(R.id.setsub);
-//        Bitmap photo =  Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888);
         source = (String) i.getExtras().get("source");
         settext = findViewById(R.id.settext);
         settext.setText("Add "+source);
@@ -198,7 +197,7 @@ public class Set extends AppCompatActivity {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                            // ...
+                            System.out.println("very good");
                         }
                     });
                     Ticketinfo ticketinfo = new Ticketinfo();
@@ -219,7 +218,7 @@ public class Set extends AppCompatActivity {
                         ticketinfo.setTime(strtime);
                     ticketinfo.setUid(FirebaseAuth.getInstance().getCurrentUser().getUid());
                     ticketinfo.setImage(filee);
-                    databaseReference.addValueEventListener(new ValueEventListener() {
+                    databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             // inside the method of on Data change we are setting
@@ -295,6 +294,9 @@ public class Set extends AppCompatActivity {
                         public void onFailure(@NonNull Exception exception) {
                             // Handle unsuccessful uploads
                             Toast.makeText(Set.this,"Fail to add document", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(getApplicationContext(), MainNav.class);
+                            startActivity(i);
+                            finish();
                             return;
                         }
                     }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -302,10 +304,11 @@ public class Set extends AppCompatActivity {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
                             // ...
+                            System.out.println("very good");
                         }
                     });
 
-                    databaseReference.addValueEventListener(new ValueEventListener() {
+                    databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             // inside the method of on Data change we are setting
