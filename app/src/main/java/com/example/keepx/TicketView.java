@@ -32,6 +32,7 @@ import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -71,7 +72,7 @@ public class TicketView extends RelativeLayout {
     private int myear, mmonth, mday, mhour, mminute;
     private TextView title, location, date, time, locationtitle, datetitle, timetitle;
     private ImageView qr, image;
-    private ContentLoadingProgressBar progressBar;
+    private ProgressBar progressBar;
     private String image1;
     private TimePickerDialog timePickerDialog;
         private DatePickerDialog datePickerDialog;
@@ -327,6 +328,7 @@ public class TicketView extends RelativeLayout {
             return;
         }
         image1 = img;
+        progressBar.setVisibility(GONE);
         progressBar.setVisibility(VISIBLE);
         image.setVisibility(GONE);
         FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -337,9 +339,15 @@ public class TicketView extends RelativeLayout {
             @Override
             public void onSuccess(Uri uri) {
                 try {
-                    Glide.with(getContext()).load(uri).into(image);
-                    image.setVisibility(VISIBLE);
-                    progressBar.setVisibility(GONE);
+                    Glide.with(getContext()).load(uri).placeholder(R.drawable.img_2).into(image);
+                    new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            image.setVisibility(VISIBLE);
+                            progressBar.setVisibility(GONE);
+                        }
+                    }, 1500); // 5000 milliseconds = 5 seconds
+
 
                 }
                 catch (Exception e){

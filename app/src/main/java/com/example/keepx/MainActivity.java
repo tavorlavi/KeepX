@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
                                     Intent intent
                                             = new Intent(MainActivity.this,
                                             MainNav.class);
+                                    intent.putExtra("source", "good");
                                     startActivity(intent);
                                     finish();
                                 }

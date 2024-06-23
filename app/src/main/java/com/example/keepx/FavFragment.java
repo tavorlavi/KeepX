@@ -2,6 +2,7 @@ package com.example.keepx;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,6 +10,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -32,6 +34,7 @@ public class FavFragment extends Fragment {
     private ProgressDialog progressDialog;
     private EditText search;
     private ImageButton x, back, sf;
+    private boolean bb;
     LinearLayout favs;
     BottomNavigationView bottomNavigationView;
     FirebaseDatabase firebaseDatabase;
@@ -47,6 +50,9 @@ public class FavFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_fav, container, false);
+        Intent i = getActivity().getIntent();
+        bb = i.hasExtra("source");
+        getActivity().getIntent().removeExtra("source");
 //        bottomNavigationView = rootView.findViewById(R.id.bottomNavigationView);
 
 //        dont allowclicks until loaded
@@ -298,9 +304,19 @@ public class FavFragment extends Fragment {
 
             }
         });
-
+        System.out.println("bb" + bb);
+        if (bb){
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    mySwipeRefreshLayout.setRefreshing(false);
+                    progressDialog.dismiss();
+                }
+            }, 2000);
+        }
+        else {
         mySwipeRefreshLayout.setRefreshing(false);
-        progressDialog.dismiss();
+        progressDialog.dismiss();}
 
     }
 

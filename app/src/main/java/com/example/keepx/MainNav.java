@@ -40,6 +40,7 @@ private final static int pic_id = 1888;
 private String source;
 
     BottomNavigationView bottomNavigationView;
+    ActivityResultLauncher<Intent> resultLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -54,6 +55,56 @@ private String source;
         bottomNavigationView
                 .setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.fav);
+        resultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == 2000) {
+                Intent data = result.getData();
+                if (data == null) {
+                    Toast.makeText(this, "Error loading image", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(getApplicationContext(), MainNav.class);
+                    startActivity(i);
+                    finish();
+                }
+                Uri uri = data.getData();
+                Intent i = new Intent(getApplicationContext(), CropImg.class);
+                if (uri == null) {
+                    Toast.makeText(this, "Error loading image", Toast.LENGTH_SHORT).show();
+                    Intent iu = new Intent(getApplicationContext(), MainNav.class);
+                    startActivity(iu);
+                }
+                try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), uri);
+                    //make bitmap smaller so it can go in the intent
+                    Bitmap smaller = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth()/6, bitmap.getHeight()/6, true);
+                    i.putExtra("img", smaller);
+                    i.putExtra("source", source);
+                    startActivity(i);
+
+                } catch (IOException e) {
+                    Toast.makeText(this, "Error loading image", Toast.LENGTH_SHORT).show();
+                    Intent iu = new Intent(getApplicationContext(), MainNav.class);
+                    startActivity(iu);}
+            }
+            else if (result.getResultCode() == pic_id) {
+                // BitMap is data structure of image file which store the image in memory
+                Bitmap photo = (Bitmap) result.getData().getExtras().get("data");
+                if (photo == null) {
+                    Toast.makeText(this, "Error loading image", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(getApplicationContext(), MainNav.class);
+                    startActivity(i);
+                    finish();
+                }
+                Intent i = new Intent(getApplicationContext(), CropImg.class);
+                i.putExtra("img", photo);
+                i.putExtra("source", source);
+                startActivity(i);
+            }
+            else {
+                Intent i = new Intent(getApplicationContext(), MainNav.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
 
     }
     IdFrag firstFragment = new IdFrag();
@@ -101,8 +152,6 @@ private String source;
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED&&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED){
             // Create an alert dialog
-            System.out.println("okkkkkksdpfmo");
-            System.err.println("okkkkkksdpfmo");
             MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
             if (view.getId() == R.id.createid){
                 source = "document";

@@ -229,6 +229,7 @@ public class Set extends AppCompatActivity {
                             Toast.makeText(Set.this, "Ticket added", Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(getApplicationContext(), MainNav.class);
                             startActivity(i);
+                            finish();
 
                         }
 
@@ -323,6 +324,7 @@ public class Set extends AppCompatActivity {
                             Toast.makeText(Set.this, "Document added", Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(getApplicationContext(), MainNav.class);
                             startActivity(i);
+                            finish();
 
                         }
 

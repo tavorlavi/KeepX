@@ -2,20 +2,30 @@ package com.example.keepx;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CalendarView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -31,6 +41,7 @@ private ImageView image;
 private String title1;
 private String image1;
 private CardView cardView;
+private ProgressBar progressBar;
 private ImageButton fav, notfav;
     public Docview(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -38,6 +49,7 @@ private ImageButton fav, notfav;
         View view = inflater.inflate(R.layout.docview,  this);
         title = findViewById(R.id.doctitle);
         image = findViewById(R.id.docimage);
+        progressBar = findViewById(R.id.loaddoc);
         cardView = findViewById(R.id.docviewcard);
         cardView.setOnLongClickListener(new OnLongClickListener() {
             @Override
@@ -101,6 +113,8 @@ private ImageButton fav, notfav;
         return title1;
     }
     public void setImage(String img){
+        progressBar.setVisibility(VISIBLE);
+        image.setVisibility(GONE);
         image1 = img;
         FirebaseStorage storage = FirebaseStorage.getInstance();
         // Create a storage reference from our app
@@ -110,7 +124,14 @@ private ImageButton fav, notfav;
             @Override
             public void onSuccess(Uri uri) {
                 try {
-                    Glide.with(getContext()).load(uri).into(image);
+                    Glide.with(getContext()).load(uri).placeholder(R.drawable.img_2).into(image);
+                    new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            image.setVisibility(VISIBLE);
+                            progressBar.setVisibility(GONE);
+                        }
+                    }, 1500); // 5000 milliseconds = 5 seconds
                 } catch (Exception e){
                 }
 

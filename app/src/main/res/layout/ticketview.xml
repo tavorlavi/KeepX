@@ -201,10 +201,12 @@
                 android:adjustViewBounds="true"
                 android:src="@drawable/ic_launcher_background"
                 />
-            <androidx.core.widget.ContentLoadingProgressBar
+            <ProgressBar
                 android:layout_width="match_parent"
                 android:id="@+id/loadticket"
                 android:layout_gravity="center"
+                android:padding="25dp"
+                android:indeterminateTint="@color/white"
                 android:layout_height="100dp"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

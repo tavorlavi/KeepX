@@ -126,6 +126,7 @@ public class Signup extends AppCompatActivity {
                                     = new Intent(Signup.this,
                                     MainNav.class);
                             startActivity(intent);
+                            intent.putExtra("source", "good");
                             finish();
                         }
                         else {

@@ -45,7 +45,6 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    implementation("com.github.bumptech.glide:glide:4.15.1")
     implementation("io.github.mayuce:AndroidDocumentScanner:1.6.1")
     implementation("com.google.android.gms:play-services-vision:20.1.3")
     implementation("com.google.firebase:firebase-ml-vision:24.1.0")
@@ -60,6 +59,7 @@ dependencies {
     implementation("androidx.compose.material3:material3:1.2.1")
     implementation("androidx.compose.material3:material3-window-size-class:1.2.1")
     implementation("androidx.compose.material3:material3-adaptive-navigation-suite:1.3.0-beta01")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.14.2")
 }
 
 
